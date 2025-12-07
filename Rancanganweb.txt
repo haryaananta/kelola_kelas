@@ -1,0 +1,88 @@
+Rancangan Website SmartKelas – Sistem Manajemen Kelas Terpadu
+1. Gambaran Umum
+
+SmartKelas adalah website manajemen kelas yang dirancang untuk membantu kegiatan administrasi dan akademik di tingkat kelas. 
+Website ini menggabungkan empat fitur utama yaitu jadwal pelajaran, jadwal piket, pengingat tugas (PR), dan catatan kas kelas. 
+Selain itu, SmartKelas dilengkapi dengan sistem login multi-level: Ketua Kelas (Admin), Guru, dan Siswa. 
+Setiap pengguna hanya dapat mengakses data sesuai peran dan kelasnya masing-masing.
+
+2. Tujuan Pengembangan
+
+Tujuan utama SmartKelas adalah menciptakan sistem informasi sederhana namun lengkap yang membantu kelas dalam mengatur kegiatan sehari-hari. 
+Website ini memungkinkan anggota kelas mengakses data secara terpusat, efisien, dan real-time.
+
+3. Fitur Utama
+📅 Jadwal Pelajaran
+Menampilkan 11 jam pelajaran per hari, dengan dua waktu istirahat khusus:
+- Istirahat 1: 09.00 – 10.00
+- Istirahat 2: 11.45 – 12.15
+Setiap kelas memiliki jadwal pelajaran tersendiri.
+🧹 Jadwal Piket
+Menampilkan daftar siswa yang bertugas membersihkan kelas setiap hari. Data dapat diedit oleh ketua kelas dan hanya dilihat oleh guru atau siswa.
+📘 Pengingat Tugas (PR)
+Siswa atau ketua kelas dapat menambahkan tugas berdasarkan mata pelajaran dan tanggal pengumpulan. Guru dapat melihat daftar tugas tiap kelas tanpa mengedit.
+💰 Catatan Kas Kelas
+Menampilkan uang masuk dan keluar dari kas kelas, serta menghitung saldo otomatis. Ketua kelas bertanggung jawab mengelola catatan ini.
+4. Level Pengguna dan Hak Akses
+
+1. Ketua Kelas (Admin): Mengelola seluruh data (tambah, edit, hapus).
+2. Guru: Hanya dapat melihat data seluruh kelas, tanpa izin edit.
+3. Siswa: Hanya dapat melihat data kelasnya sendiri.
+
+5. Struktur Halaman Website
+
+1. login.php – Halaman login dengan pilihan peran (Admin/Guru/Siswa) dan kelas.
+2. index.php – Dashboard utama berisi ringkasan semua fitur.
+3. jadwal_pelajaran.php – Menampilkan tabel jadwal pelajaran per hari.
+4. jadwal_piket.php – Daftar piket harian.
+5. tugas.php – Daftar tugas aktif dan status pengerjaan.
+6. kas.php – Catatan kas kelas.
+7. logout.php – Menghapus sesi login pengguna.
+
+6. Rancangan Database (MySQL)
+
+Tabel utama:
+1. users (id, username, password, role, kelas)
+2. jadwal_pelajaran (id, hari, jam_ke, pelajaran, guru, ruang, kelas)
+3. jadwal_piket (id, hari, nama_siswa, kelas)
+4. tugas (id, pelajaran, deskripsi, deadline, status, kelas)
+5. kas (id, tanggal, keterangan, jenis, jumlah, kelas)
+
+7. Hak Akses di Sistem (PHP)
+
+Login menggunakan session:
+$_SESSION['username'], $_SESSION['role'], dan $_SESSION['kelas'].
+Data ditampilkan sesuai kelas dan peran pengguna.
+
+Contoh filter data berdasarkan kelas:
+$query = "SELECT * FROM jadwal_pelajaran WHERE kelas='$kelas'";
+
+8. Struktur Folder Proyek
+
+/smartkelas
+│
+├── config/
+│   └── db.php
+│
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/
+│
+├── login.php
+├── logout.php
+├── index.php
+├── jadwal_pelajaran.php
+├── jadwal_piket.php
+├── tugas.php
+├── kas.php
+└── includes/
+    ├── header.php
+    ├── navbar.php
+    └── footer.php
+
+9. Kesimpulan
+
+Website SmartKelas merupakan solusi sederhana untuk manajemen kegiatan kelas yang mencakup jadwal, piket, tugas, dan kas. 
+Dengan sistem login multi-user, website ini menjaga keamanan dan pembatasan hak akses sesuai peran masing-masing. 
+SmartKelas mudah dibuat menggunakan PHP, MySQL, HTML, CSS, dan Bootstrap.
